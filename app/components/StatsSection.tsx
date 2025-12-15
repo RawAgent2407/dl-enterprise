@@ -9,7 +9,7 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-12 sm:py-16 lg:py-20">
+    <section className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 lg:mb-20">
@@ -29,7 +29,7 @@ export default function StatsSection() {
           className="
             grid 
             grid-cols-2 
-            sm:grid-cols-4 
+            md:grid-cols-4 
             
             gap-8 
             sm:gap-10 

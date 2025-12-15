@@ -4,8 +4,19 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section className="w-full bg-[#f3f3f3] py-10 sm:py-16 lg:py-20">
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+    <section
+      className="
+    w-full
+    py-12 sm:py-16 lg:py-20
+    px-4 sm:px-6 lg:px-12 xl:px-20
+    bg-white
+    bg-[url('/images/about-bg-mobile.png')]
+    lg:bg-[url('/images/about-bg-desktop.png')]
+    bg-cover bg-center
+  "
+    >
+      {" "}
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-12">
           {/* Text Heading */}
@@ -39,16 +50,19 @@ export default function AboutSection() {
 
         {/* Image Section */}
         <div className="mt-6 sm:mt-8 lg:mt-10 w-full">
-          <div className="w-full relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[420px]">
+          <div className="relative w-full h-[360px] sm:h-[300px] md:h-[380px] lg:h-[420px] overflow-hidden rounded-md">
             <Image
               src="/images/img_kitchen_2_jpg.png"
               alt="Modern kitchen with LED lighting"
               fill
-              className="object-cover rounded-md"
-              sizes="(max-width: 640px) 100vw, 
-           (max-width: 768px) 100vw, 
-           (max-width: 1024px) 100vw, 
-           100vw"
+              priority={false}
+              className=""
+              sizes="
+      (max-width: 640px) 100vw,
+      (max-width: 768px) 100vw,
+      (max-width: 1024px) 100vw,
+      100vw
+    "
             />
           </div>
         </div>

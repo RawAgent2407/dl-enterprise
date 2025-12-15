@@ -1,10 +1,11 @@
-import AboutSection from "./sections/AboutSection";
-import CustomSolutionsSection from "./sections/CustomSolutionsSection";
-import ImageSlider from "./sections/ImageSlider";
-import ProductsSection from "./sections/ProductsSection";
-import PromoSection from "./sections/PromoSection";
-import StatsSection from "./sections/StatsSection";
-import WhyChooseSection from "./sections/WhyChooseSection";
+import AboutSection from "../components/AboutSection";
+import ContactSection from "../components/ContactSection";
+import CustomSolutionsSection from "../components/CustomSolutionsSection";
+import ImageSlider from "../components/ImageSlider";
+import ProductsSection from "../components/ProductsSection";
+import StatsSection from "../components/StatsSection";
+import WhyChooseSection from "../components/WhyChooseSection";
+
 
 const HomePage = () => {
   return (
@@ -15,7 +16,7 @@ const HomePage = () => {
       <WhyChooseSection />
       <StatsSection />
       <CustomSolutionsSection />
-      <PromoSection />
+      <ContactSection />
     </div>
   );
 };

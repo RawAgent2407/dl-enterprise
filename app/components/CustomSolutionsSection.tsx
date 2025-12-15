@@ -34,10 +34,10 @@ export default function CustomSolutionsSection() {
   ];
 
   return (
-    <section className="w-full bg-[#f3f3f3] py-12 sm:py-16 lg:py-20 flex justify-center">
-      <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+    <section className="w-full bg-[#f3f3f3]  py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20 font=['Instrument Sans']">
+      <div className="w-full   px-4 sm:px-6 lg:px-10">
         {/* Heading */}
-        <h2 className="text-[22px] sm:text-[32px] lg:text-[44px] font-['Plus_Jakarta_Sans'] font-semibold leading-tight sm:leading-snug text-[#050b16] text-center sm:text-left mb-10">
+        <h2 className="text-[28px] sm:text-[32px] lg:text-[48px] font-['Instrument Sans'] font-semibold leading-tight sm:leading-snug text-[#050b16] text-center sm:text-left mb-10">
           Custom Lights Solutions, <br className="hidden sm:block" />
           From Concept to Creation.
         </h2>
@@ -48,10 +48,11 @@ export default function CustomSolutionsSection() {
             grid 
             grid-cols-1 
             sm:grid-cols-2 
-            lg:grid-cols-4 
+            xl:grid-cols-4 
             gap-4 
             sm:gap-6 
-            lg:gap-8
+            lg:gap-8 
+            xl:gap-14
           "
         >
           {solutions.map((solution, index) => (
@@ -74,14 +75,14 @@ export default function CustomSolutionsSection() {
               )}
 
               {/* Icon and Title */}
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-2 md:gap-4 xl:gap-10 w-full">
                 <img
                   src={solution.icon}
                   alt={solution.title}
                   className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
                 />
                 <h3
-                  className={`whitespace-pre-line text-[18px] sm:text-[20px] lg:text-[22px] font-['General_Sans'] font-medium leading-snug ${
+                  className={`whitespace-pre-line text-[18px] sm:text-[20px] lg:text-[22px] font-medium leading-snug ${
                     solution.isSpecial ? "text-white" : "text-[#050b16]"
                   }`}
                 >
@@ -91,7 +92,7 @@ export default function CustomSolutionsSection() {
 
               {/* Description */}
               <p
-                className={`mt-3 text-[14px] sm:text-[15px] lg:text-[16px] font-['Montserrat'] leading-relaxed ${
+                className={`mt-3 md:mt-6 xl:mt-10 text-base  font-['DM Sans'] leading-relaxed ${
                   solution.isSpecial ? "text-white" : "text-[#4d5555]"
                 }`}
               >

@@ -20,7 +20,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {
             onClick={() => setSelectedImage(index)}
             className={`${
               index >= 4 && "hidden"
-            } w-20 h-20  overflow-hidden border-2 ${
+            } w-15 h-15  md:w-18 md:h-18  overflow-hidden border-2 ${
               selectedImage === index ? "border-red-500" : "border-gray-200"
             }`}
           >
@@ -31,19 +31,19 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {
             />
           </button>
         ))}
-       {images.length > 4 && (
-           <button
-          className="w-20 h-20 flex items-center justify-center border-2 border-gray-200 hover:border-gray-400  text-gray-400"
-          onClick={() => {
-            if (images.length - 1 === selectedImage) {
-              setSelectedImage(0);
-            } else {
-              setSelectedImage(selectedImage + 1);
-            }
-          }}
-        >
-          <ChevronDown className="w-6 h-6 hover:text-gray-600" />
-        </button>
+        {images.length > 4 && (
+          <button
+            className=" w-15 h-15 md:w-18 md:h-18 flex items-center justify-center border-2 border-gray-200 hover:border-gray-400  text-gray-400"
+            onClick={() => {
+              if (images.length - 1 === selectedImage) {
+                setSelectedImage(0);
+              } else {
+                setSelectedImage(selectedImage + 1);
+              }
+            }}
+          >
+            <ChevronDown className="w-6 h-6 hover:text-gray-600" />
+          </button>
         )}
       </div>
 

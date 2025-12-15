@@ -17,7 +17,7 @@ export default function WhyChooseSection() {
   ];
 
   return (
-    <section className="w-full bg-[#f3f3f3] py-10 sm:py-16 lg:py-20">
+    <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16">
           {/* Left Side - Image Container */}
@@ -87,6 +87,6 @@ export default function WhyChooseSection() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
