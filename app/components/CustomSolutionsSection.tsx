@@ -1,59 +1,63 @@
-/* eslint-disable @next/next/no-img-element */
+/**
+ * eslint-disable @next/next/no-img-element
+ *
+ * @format
+ */
+
 "use client";
 
 export default function CustomSolutionsSection() {
   const solutions = [
     {
-      icon: "/images/solution1.png",
+      icon: "/images/solution_1.png",
       title: "Design\nCustomization",
       description: "Custom HVAC designs ensure precision, optimal performance.",
       bgColor: "bg-white",
     },
     {
-      icon: "/images/solution2.png",
+      icon: "/images/solution_2.png",
       title: "Production \nProcess",
       description:
         "Advanced techniques ensure consistent quality, efficient production, and adherence.",
       bgColor: "bg-white",
     },
     {
-      icon: "/images/solution3.png",
+      icon: "/images/solution_3.png",
       title: "Custom \nLogistics",
       description:
         "Superior material selection ensures exceptional durability, reliability.",
       bgColor: "bg-white",
     },
     {
-      icon: "/images/solution4.png",
+      icon: "/images/solution_4.png",
       title: "Material \nSelection",
       description:
         "Efficient logistics systems ensure accurate scheduling, timely delivery.",
-      bgColor: "bg-[#b10503]",
+      bgColor: "bg-[#A60006]",
       isSpecial: true,
     },
   ];
 
   return (
     <section className="w-full bg-[#f3f3f3]  py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20 font=['Instrument Sans']">
-      <div className="w-full   px-4 sm:px-6 lg:px-10">
+      <div className='w-full   px-4 sm:px-6 lg:px-10'>
         {/* Heading */}
-        <h2 className="text-[28px] sm:text-[32px] lg:text-[48px] font-['Instrument Sans'] font-semibold leading-tight sm:leading-snug text-[#050b16] text-center sm:text-left mb-10">
-          Custom Lights Solutions, <br className="hidden sm:block" />
+        <h2 className="text-[28px] sm:text-[32px] lg:text-[48px] font-['Instrument Sans'] font-medium leading-tight sm:leading-snug text-[#050b16] text-center sm:text-left mb-10">
+          Custom Lights Solutions, <br className='hidden sm:block' />
           From Concept to Creation.
         </h2>
 
         {/* Solutions Grid */}
         <div
-          className="
+          className='
             grid 
             grid-cols-1 
             sm:grid-cols-2 
             xl:grid-cols-4 
             gap-4 
             sm:gap-6 
-            lg:gap-8 
-            xl:gap-14
-          "
+            xl:gap-6
+          '
         >
           {solutions.map((solution, index) => (
             <div
@@ -62,24 +66,24 @@ export default function CustomSolutionsSection() {
             >
               {/* Special Card Corner */}
               {solution.isSpecial && (
-                <div className="absolute top-0 right-0 bg-[#b10503]">
-                  <div className="flex justify-end items-center">
-                    <div className="w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white" />
-                    <div className="w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-[#242424]" />
+                <div className='absolute top-0 right-0 bg-[#b10503]'>
+                  <div className='flex justify-end items-center'>
+                    <div className='w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white' />
+                    <div className='w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-[#242424]' />
                   </div>
-                  <div className="flex justify-end items-center">
-                    <div className="w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />
-                    <div className="w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white" />
+                  <div className='flex justify-end items-center'>
+                    <div className='w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10' />
+                    <div className='w-5 h-5 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white' />
                   </div>
                 </div>
               )}
 
               {/* Icon and Title */}
-              <div className="flex flex-col gap-2 md:gap-4 xl:gap-10 w-full">
+              <div className='flex flex-col gap-2 md:gap-4 xl:gap-10 w-full'>
                 <img
                   src={solution.icon}
                   alt={solution.title}
-                  className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                  className='w-8 h-8 lg:w-10 lg:h-10 object-contain'
                 />
                 <h3
                   className={`whitespace-pre-line text-[18px] sm:text-[20px] lg:text-[22px] font-medium leading-snug ${

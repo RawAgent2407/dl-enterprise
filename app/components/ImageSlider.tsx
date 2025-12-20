@@ -1,7 +1,9 @@
+/** @format */
+
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 const slides = [
@@ -22,28 +24,28 @@ export default function ImageSlider() {
   };
 
   return (
-    <div className="relative w-full   overflow-hidden">
+    <div className='relative w-full   overflow-hidden'>
       {/* Image */}
-      <div className="w-full h-[90vh]  relative">
+      <div className='w-full h-[90vh]  relative'>
         <Image
           src={slides[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
           fill
-          className=""
+          className=' object-cover'
         />
       </div>
 
       {/* Navigation Buttons */}
-      <div className="absolute bottom-0 left-0 flex ">
+      <div className='absolute bottom-0 left-0 flex '>
         <button
           onClick={prevSlide}
-          className="bg-white text-gray-800 p-2 shadow hover:bg-gray-200 transition "
+          className='bg-white text-gray-800 p-2 shadow hover:bg-gray-200 transition '
         >
           <HiArrowLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="bg-red-500 text-white p-2  shadow hover:bg-red-400 transition "
+          className='bg-red-500 text-white p-2  shadow hover:bg-red-400 transition '
         >
           <HiArrowRight size={24} />
         </button>

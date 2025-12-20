@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 export default function StatsSection() {
@@ -9,14 +11,14 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section className='w-full bg-[#FFFFFE] border-t-2 border-[#0000000A] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20'>
+      <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12'>
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 lg:mb-20">
-          <h2 className="text-[22px] sm:text-[32px] lg:text-[42px] font-['Plus_Jakarta_Sans'] font-semibold leading-snug text-[#050b16] mb-4">
-            Proven Excellence in Every Valve Shipped
+        <div className='text-center max-w-4xl mx-auto mb-10 sm:mb-14 lg:mb-20'>
+          <h2 className='text-[22px] sm:text-[32px] lg:text-[42px]   font-medium leading-snug text-[#050b16] mb-4'>
+            Proven Excellence in Every Light Shipped
           </h2>
-          <p className="text-[14px] sm:text-[15px] lg:text-[17px]  text-[#364151] leading-relaxed">
+          <p className='text-[14px] sm:text-[15px] lg:text-[17px]  text-[#364151] leading-relaxed'>
             Delivering unmatched reliability, quality compliance, and customer
             satisfaction through every product we create. Our commitment to
             excellence is reflected in the trust of our customers and industry
@@ -26,7 +28,7 @@ export default function StatsSection() {
 
         {/* Stats Grid */}
         <div
-          className="
+          className='
             grid 
             grid-cols-2 
             md:grid-cols-4 
@@ -35,20 +37,20 @@ export default function StatsSection() {
             sm:gap-10 
             lg:gap-14
             text-center sm:text-left
-          "
+          '
         >
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="
+              className='
                 flex flex-col items-center sm:items-start
-                border-b-2 border-[#e52828] pb-2 sm:pb-4
-              "
+                border-b-2 border-[#A60006] pb-2 sm:pb-4
+              '
             >
-              <h3 className="text-[28px] sm:text-[40px] lg:text-[52px]  font-semibold text-[#e52828] leading-tight">
+              <h3 className='text-[28px] sm:text-[40px] lg:text-[52px]  font-medium text-[#A60006] leading-tight'>
                 {stat.value}
               </h3>
-              <p className="text-[15px] sm:text-[16px] lg:text-[18px]  text-[#050b16] mt-2">
+              <p className='text-[15px] sm:text-[16px] lg:text-[18px]  text-[#050b16] mt-2'>
                 {stat.label}
               </p>
             </div>

@@ -1,28 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-family: "Instrument Sans", sans-serif;
+}
+
+/* hide scrollbar but keep scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE & Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono); */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    font-family: "Instrument Sans", sans-serif;
   }
 }
 
 body {
   background: var(--background);
   color: black;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Instrument Sans", sans-serif;
 }
 
 

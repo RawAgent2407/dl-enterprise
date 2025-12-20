@@ -1,5 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
-import React from "react";
+/**
+ * eslint-disable react/no-unescaped-entities
+ *
+ * @format
+ */
 
 const SpecificationsTab = () => {
   const specsLeft = [
@@ -23,26 +26,26 @@ const SpecificationsTab = () => {
   ];
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-3xl font-semibold text-gray-900">Specifications</h2>
+    <div className='space-y-8'>
+      <h2 className='text-3xl font-medium text-gray-900'>Specifications</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
         {/* Left Column */}
-        <div className="space-y-6">
+        <div className='space-y-6'>
           {specsLeft.map((spec, index) => (
             <div key={index}>
-              <h3 className="font-semibold text-gray-900 mb-1">{spec.label}</h3>
-              <p className="text-gray-700">{spec.value}</p>
+              <h3 className='font-medium text-gray-900 mb-1'>{spec.label}</h3>
+              <p className='text-gray-700'>{spec.value}</p>
             </div>
           ))}
         </div>
 
         {/* Right Column */}
-        <div className="space-y-6">
+        <div className='space-y-6'>
           {specsRight.map((spec, index) => (
             <div key={index}>
-              <h3 className="font-semibold text-gray-900 mb-1">{spec.label}</h3>
-              <p className="text-gray-700">{spec.value}</p>
+              <h3 className='font-medium text-gray-900 mb-1'>{spec.label}</h3>
+              <p className='text-gray-700'>{spec.value}</p>
             </div>
           ))}
         </div>

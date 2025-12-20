@@ -1,9 +1,11 @@
+/** @format */
+
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 const products = [
   { label: "LED Tube Lights", href: "/product/led-tube-lights" },
@@ -18,44 +20,44 @@ const Header = () => {
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white text-black shadow-sm">
+    <header className='sticky top-0 z-50 bg-white text-black shadow-sm'>
       {/* TOP BAR */}
-      <div className="">
-        <div className="w-full  mx-auto  px-4 sm:px-6 lg:px-12 xl:px-20">
-          <div className="flex h-20 items-center justify-between">
+      <div className=''>
+        <div className='w-full  mx-auto  px-4 sm:px-6 lg:px-12 xl:px-20'>
+          <div className='flex h-20 items-center justify-between'>
             {/* LOGO */}
-            <Link href="/" className="flex items-center">
+            <Link href='/' className='flex items-center'>
               <Image
-                src="/logo.svg"
-                alt="D.L. Enterprises"
+                src='/logo.svg'
+                alt='D.L. Enterprises'
                 width={160}
                 height={40}
                 priority
-                className="w-[130px] sm:w-[150px]"
+                className='w-[130px] sm:w-[150px]'
               />
             </Link>
 
             {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-6 lg:gap-10">
-              <Link href="/" className="nav-link">
+            <nav className='hidden md:flex items-center gap-6 lg:gap-10'>
+              <Link href='/' className='nav-link'>
                 Home
               </Link>
 
               {/* PRODUCTS DROPDOWN */}
               <div
-                className="relative"
+                className='relative'
                 onMouseEnter={() => setIsProductsOpen(true)}
                 onMouseLeave={() => setIsProductsOpen(false)}
               >
                 {/* Trigger */}
                 <button
-                  className="
+                  className='
       flex items-center gap-1
       text-sm font-medium text-gray-800
       hover:text-red-600
       transition-colors
-    "
-                  aria-haspopup="true"
+    '
+                  aria-haspopup='true'
                   aria-expanded={isProductsOpen}
                 >
                   Products
@@ -80,17 +82,17 @@ const Header = () => {
       }
     `}
                 >
-                  <ul className="py-2">
+                  <ul className='py-2'>
                     {products.map((item) => (
                       <li key={item.label}>
                         <Link
                           href={item.href}
-                          className="
+                          className='
               block px-4 py-2.5
               text-sm text-gray-700
               hover:bg-red-50 hover:text-red-600
               transition-colors
-            "
+            '
                         >
                           {item.label}
                         </Link>
@@ -100,28 +102,36 @@ const Header = () => {
                 </div>
               </div>
 
-              <Link href="/catalog" className="nav-link">
-                Catalogue
+              <Link href='/catalog' className='nav-link'>
+                Category
               </Link>
-              <Link href="/about-us" className="nav-link">
+
+              <a
+                href='https://drive.google.com/file/d/1E9cvwhsgCtO53MkM90gqhIxyP-VTSUuE/view?usp=drivesdk'
+                className='nav-link'
+                target='_blank'
+              >
+                Catalogue
+              </a>
+              <Link href='/about-us' className='nav-link'>
                 About
               </Link>
-              <Link href="/contact-us" className="nav-link">
+              {/* <Link href="/contact-us" className="nav-link">
                 Contact Us
-              </Link>
+              </Link> */}
             </nav>
 
             {/* RIGHT */}
-            <div className="flex items-center gap-4">
+            <div className='flex items-center gap-4'>
               <Link
-                href="/contact-us"
-                className="hidden sm:inline-flex  bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-700 transition"
+                href='/contact-us'
+                className='hidden sm:inline-flex  bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-700 transition'
               >
                 Contact Us
               </Link>
 
               <button
-                className="md:hidden"
+                className='md:hidden'
                 onClick={() => setIsMobileMenuOpen(true)}
               >
                 <Menu />
@@ -152,29 +162,29 @@ const Header = () => {
           }`}
         >
           {/* HEADER */}
-          <div className="flex items-center justify-between px-4 py-4 shadow-sm">
-            <Image src="/logo.svg" alt="Logo" width={120} height={30} />
+          <div className='flex items-center justify-between px-4 py-4 shadow-sm'>
+            <Image src='/logo.svg' alt='Logo' width={120} height={30} />
             <button onClick={() => setIsMobileMenuOpen(false)}>
               <X />
             </button>
           </div>
 
           {/* CONTENT */}
-          <div className="py-4 space-y-2 px-2 overflow-y-auto h-[calc(100vh-80px)]">
+          <div className='py-4 space-y-2 px-2 overflow-y-auto h-[calc(100vh-80px)]'>
             {/* HOME */}
-            <div className="group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50">
+            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
               <Link
-                href="/"
-                className="block text-base font-medium text-black group-hover:text-red-600 transition-colors"
+                href='/'
+                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
               >
                 Home
               </Link>
             </div>
 
             {/* PRODUCTS */}
-            <div className="group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50">
+            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
               <button
-                className="w-full flex items-center justify-between text-base font-medium text-black group-hover:text-red-600 transition-colors"
+                className='w-full flex items-center justify-between text-base font-medium text-black group-hover:text-red-600 transition-colors'
                 onClick={() => setIsMobileProductsOpen(!isMobileProductsOpen)}
               >
                 Products
@@ -188,12 +198,12 @@ const Header = () => {
               </button>
 
               {isMobileProductsOpen && (
-                <div className="mt-3 space-y-2 border-l-2 border-red-500 pl-4">
+                <div className='mt-3 space-y-2 border-l-2 border-red-500 pl-4'>
                   {products.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
-                      className="block text-sm text-gray-700 hover:text-red-600 transition-colors"
+                      className='block text-sm text-gray-700 hover:text-red-600 transition-colors'
                     >
                       {item.label}
                     </Link>
@@ -203,41 +213,41 @@ const Header = () => {
             </div>
 
             {/* CATALOGUE */}
-            <div className="group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50">
+            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
               <Link
-                href="/catalog"
-                className="block text-base font-medium text-black group-hover:text-red-600 transition-colors"
+                href='/catalog'
+                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
               >
                 Catalogue
               </Link>
             </div>
 
             {/* ABOUT */}
-            <div className="group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50">
+            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
               <Link
-                href="/about-us"
-                className="block text-base font-medium text-black group-hover:text-red-600 transition-colors"
+                href='/about-us'
+                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
               >
                 About
               </Link>
             </div>
 
             {/* ABOUT */}
-            <div className="group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50">
+            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
               <Link
-                href="/contact-us"
-                className="block text-base font-medium text-black group-hover:text-red-600 transition-colors"
+                href='/contact-us'
+                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
               >
                 Contact Us
               </Link>
             </div>
 
             {/* CTA */}
-            <div className="group">
+            <div className='group'>
               <Link
-                href="/contact-us"
-                className="block  bg-black text-white text-center py-3 font-medium mt-4
-               hover:bg-red-600 transition-colors"
+                href='/contact-us'
+                className='block  bg-black text-white text-center py-3 font-medium mt-4
+               hover:bg-red-600 transition-colors'
               >
                 Contact Us
               </Link>

@@ -1,4 +1,9 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/**
+ * eslint-disable react-hooks/rules-of-hooks
+ *
+ * @format
+ */
+
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
@@ -39,24 +44,24 @@ const items = [
 
 export default function AboutTimeline() {
   return (
-    <section className="w-full py-16 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className='w-full py-16 sm:py-20 bg-white'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900">
+        <div className='text-center max-w-3xl mx-auto mb-16'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900'>
             Where Quality Meets Innovation
           </h2>
-          <p className="mt-4 text-gray-600 text-sm sm:text-base">
+          <p className='mt-4 text-gray-600 text-sm sm:text-base'>
             We've been a trusted name in LED lighting and plastic housings for
             over 22 years, serving manufacturers with excellence and precision.
           </p>
         </div>
 
         {/* Timeline */}
-        <div className="relative">
-          <div className="absolute sm:left-1/2 left-0 top-0 h-full w-1 bg-red-500/30 -translate-x-1/2" />
+        <div className='relative'>
+          <div className='absolute sm:left-1/2 left-0 top-0 h-full w-1 bg-red-500/30 -translate-x-1/2' />
 
-          <div className="space-y-16 ml-5 sm:ml-0">
+          <div className='space-y-16 ml-5 sm:ml-0'>
             {items.map((item, index) => {
               const { ref, isVisible } = useInView({
                 threshold: 0.1,
@@ -76,10 +81,10 @@ export default function AboutTimeline() {
                   `}
                   style={{ transitionDelay: `${index * 120}ms` }}
                 >
-                  <div className="flex items-start sm:block">
+                  <div className='flex items-start sm:block'>
                     {/* Mobile dot */}
-                    <div className="flex sm:hidden relative -left-6.5 pt-2">
-                      <span className="w-3 h-3 bg-red-600 rounded-full z-10" />
+                    <div className='flex sm:hidden relative -left-6.5 pt-2'>
+                      <span className='w-3 h-3 bg-red-600 rounded-full z-10' />
                     </div>
 
                     <div
@@ -100,17 +105,17 @@ export default function AboutTimeline() {
                           }
                         `}
                       >
-                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                        <h3 className='text-lg sm:text-xl font-medium text-gray-900'>
                           {item.title}
                         </h3>
-                        <p className="mt-3 text-gray-600 text-sm sm:text-base">
+                        <p className='mt-3 text-gray-600 text-sm sm:text-base'>
                           {item.description}
                         </p>
                       </div>
 
                       {/* Dot (Desktop) */}
-                      <div className="hidden sm:flex relative">
-                        <span className="w-3 h-3 bg-red-600 rounded-full z-10" />
+                      <div className='hidden sm:flex relative'>
+                        <span className='w-3 h-3 bg-red-600 rounded-full z-10' />
                       </div>
 
                       {/* Image */}
@@ -124,13 +129,13 @@ export default function AboutTimeline() {
                           }
                         `}
                       >
-                        <div className="relative w-full h-[200px] sm:h-[260px] lg:h-[280px] rounded-lg overflow-hidden">
+                        <div className='relative w-full h-[200px] sm:h-[260px] lg:h-[280px] rounded-lg overflow-hidden'>
                           <Image
                             src={item.image}
                             alt={item.title}
                             fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className='object-cover'
+                            sizes='(max-width: 768px) 100vw, 50vw'
                           />
                         </div>
                       </div>

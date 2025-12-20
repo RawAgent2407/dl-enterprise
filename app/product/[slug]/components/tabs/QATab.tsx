@@ -1,6 +1,8 @@
+/** @format */
+
 "use client";
-import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const QATab = () => {
   const allQuestions = [
@@ -44,21 +46,23 @@ const QATab = () => {
   const qaItems = allQuestions.slice(0, visibleCount);
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-3xl font-semibold text-gray-900">Questions & Answers</h2>
+    <div className='space-y-8'>
+      <h2 className='text-3xl font-medium text-gray-900'>
+        Questions & Answers
+      </h2>
 
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {qaItems.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all"
+            className='bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all'
           >
             {/* Question Accordion Header */}
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full flex justify-between items-center p-4 text-left"
+              className='w-full flex justify-between items-center p-4 text-left'
             >
-              <span className="font-medium text-gray-900 text-lg">
+              <span className='font-medium text-gray-900 text-lg'>
                 {item.question}
               </span>
 
@@ -75,7 +79,7 @@ const QATab = () => {
                 openIndex === index ? "max-h-40 pb-4" : "max-h-0"
               }`}
             >
-              <p className="text-gray-700 text-[15px] leading-relaxed">
+              <p className='text-gray-700 text-[15px] leading-relaxed'>
                 {item.answer}
               </p>
             </div>
@@ -85,10 +89,10 @@ const QATab = () => {
 
       {/* Load More Button */}
       {visibleCount < allQuestions.length && (
-        <div className="flex justify-center">
+        <div className='flex justify-center'>
           <button
             onClick={loadMore}
-            className="px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition"
+            className='px-6 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition'
           >
             LOAD MORE
           </button>

@@ -1,9 +1,11 @@
+/** @format */
+
 "use client";
 
-import React, { useState, use } from "react";
+import BrightestLineup from "@/app/components/BrightestLineup";
+import { use } from "react";
 import ProductGallery from "./components/ProductGallery";
 import ProductInfo from "./components/ProductInfo";
-import BrightestLineup from "@/app/components/BrightestLineup";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +13,6 @@ interface ProductPageProps {
 
 const ProductPage = ({ params }: ProductPageProps) => {
   const { slug } = use(params); // ✅ unwrap the promise
-
 
   const product = {
     id: "cob-deep-cone-spotlight",
@@ -39,52 +40,52 @@ const ProductPage = ({ params }: ProductPageProps) => {
 
   return (
     <>
-      <div className="w-full bg-[#f3f3f3]">
+      <div className='w-full bg-[#f3f3f3]'>
         <div
-          className="
+          className='
       mx-auto
       px-3 sm:px-6 lg:px-12 xl:px-20
       py-2
-    "
+    '
         >
           <nav
-            className="
+            className='
         flex flex-wrap items-center
         gap-x-2 gap-y-1
         text-sm sm:text-base
-      "
+      '
           >
-            <span className="text-gray-500 font-medium whitespace-nowrap">
+            <span className='text-gray-500 font-medium whitespace-nowrap'>
               Products
             </span>
 
-            <span className="text-gray-400 font-medium">›</span>
+            <span className='text-gray-400 font-medium'>›</span>
 
-            <span className="text-gray-500 font-medium whitespace-nowrap">
+            <span className='text-gray-500 font-medium whitespace-nowrap'>
               LED Profile Lights
             </span>
 
-            <span className="text-gray-400 font-medium">›</span>
+            <span className='text-gray-400 font-medium'>›</span>
 
-            <span className="text-black font-semibold truncate max-w-[200px] sm:max-w-none">
+            <span className='text-black font-medium truncate max-w-[200px] sm:max-w-none'>
               Condenser Union
             </span>
           </nav>
         </div>
       </div>
 
-      <section className="bg-white text-black">
+      <section className='bg-white text-black'>
         {/* <h1>Product: {slug}</h1> */}
 
-        <div className=" py-12 sm:py-10 lg:py-15 px-4 sm:px-6 lg:px-12 xl:px-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+        <div className=' py-12 sm:py-10 lg:py-15 px-4 sm:px-6 lg:px-12 xl:px-20'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 max-h-screen overflow-hidden'>
             <ProductGallery images={product.images} />
             <ProductInfo product={product} />
           </div>
         </div>
       </section>
-      <section className="bg-white text-black">
-       <BrightestLineup/>
+      <section className='bg-white text-black'>
+        <BrightestLineup />
       </section>
     </>
   );

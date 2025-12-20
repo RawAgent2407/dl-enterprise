@@ -1,7 +1,9 @@
+/** @format */
+
 "use client";
 
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const faqs = [
   {
@@ -35,32 +37,32 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="w-full bg-[#f3f3f3]  py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+    <section className='w-full bg-[#f3f3f3]  py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20'>
+      <div className='px-4 sm:px-6 lg:px-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20'>
           {/* LEFT CONTENT */}
-          <div className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black">
-              Frequently <br className="hidden sm:block" /> Asked Question
+          <div className='space-y-4'>
+            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-medium text-black'>
+              Frequently <br className='hidden sm:block' /> Asked Question
             </h2>
-            <p className="text-sm sm:text-base text-gray-500 max-w-md">
+            <p className='text-sm sm:text-base text-gray-500 max-w-md'>
               Find answers to common questions about LED lighting, performance,
               lifespan, and reliability.
             </p>
           </div>
 
           {/* RIGHT ACCORDION */}
-          <div className="divide-y divide-gray-200">
+          <div className='divide-y divide-gray-200'>
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
 
               return (
-                <div key={index} className="py-6">
+                <div key={index} className='py-6'>
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex w-full items-center justify-between text-left"
+                    className='flex w-full items-center justify-between text-left'
                   >
-                    <span className="text-base sm:text-lg font-medium text-black">
+                    <span className='text-base sm:text-lg font-medium text-black'>
                       {faq.question}
                     </span>
                     <ChevronDown
@@ -77,8 +79,8 @@ export default function FAQSection() {
                         : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
-                    <div className="overflow-hidden">
-                      <p className="text-sm sm:text-base text-gray-500 leading-relaxed">
+                    <div className='overflow-hidden'>
+                      <p className='text-sm sm:text-base text-gray-500 leading-relaxed'>
                         {faq.answer}
                         {faq.answer}
                       </p>

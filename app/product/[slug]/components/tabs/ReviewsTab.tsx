@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+/** @format */
+
 import { Star } from "lucide-react";
+import { useState } from "react";
 
 const ReviewsTab = () => {
   const allReviews = [
@@ -104,23 +106,23 @@ const ReviewsTab = () => {
   const reviewsToShow = allReviews.slice(0, visibleCount);
 
   return (
-    <div className="space-y-10">
+    <div className='space-y-10'>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Customer Reviews</h2>
-        <span className="text-gray-500">{allReviews.length}</span>
+      <div className='flex items-center justify-between'>
+        <h2 className='text-2xl font-bold text-gray-900'>Customer Reviews</h2>
+        <span className='text-gray-500'>{allReviews.length}</span>
       </div>
 
       {/* Reviews */}
-      <div className="space-y-10">
+      <div className='space-y-10'>
         {reviewsToShow.map((review, index) => (
           <div
             key={index}
-            className="border border-gray-100 rounded-xl p-6 shadow-sm bg-white hover:shadow-md transition-all duration-300"
+            className='border border-gray-100 rounded-xl p-6 shadow-sm bg-white hover:shadow-md transition-all duration-300'
           >
             {/* Rating + Title */}
-            <div className="flex items-center space-x-3 mb-3">
-              <div className="flex">
+            <div className='flex items-center space-x-3 mb-3'>
+              <div className='flex'>
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -132,20 +134,20 @@ const ReviewsTab = () => {
                   />
                 ))}
               </div>
-              <span className="text-lg font-semibold text-gray-900">
+              <span className='text-lg font-medium text-gray-900'>
                 {review.title}
               </span>
             </div>
 
             {/* Review text */}
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className='text-gray-700 leading-relaxed mb-4'>
               {review.review}
             </p>
 
             {/* Author */}
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
-              <div className="w-9 h-9 bg-gray-300 rounded-full"></div>
-              <span className="font-semibold">{review.author}</span>
+            <div className='flex flex-wrap items-center gap-2 text-sm text-gray-500'>
+              <div className='w-9 h-9 bg-gray-300 rounded-full'></div>
+              <span className='font-medium'>{review.author}</span>
               <span>•</span>
               <span>{review.location}</span>
               <span>•</span>
@@ -157,10 +159,10 @@ const ReviewsTab = () => {
 
       {/* Load More */}
       {visibleCount < allReviews.length && (
-        <div className="text-center">
+        <div className='text-center'>
           <button
             onClick={loadMore}
-            className="px-6 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all shadow-sm"
+            className='px-6 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all shadow-sm'
           >
             LOAD MORE
           </button>
