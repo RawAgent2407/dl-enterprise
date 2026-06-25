@@ -13,11 +13,11 @@ function formatProduct(p: any, populate = false) {
     description: p.description ?? null,
     rating: p.rating,
     totalRatings: p.totalRatings ?? null,
-    variants: p.variants ?? [],
-    coreSpecifications: p.coreSpecifications ?? [],
-    electricalSpecifications: p.electricalSpecifications ?? [],
-    keyFeatures: p.keyFeatures ?? [],
-    daigram: p.daigram ?? null,
+    dimension: p.dimension ?? null,
+    installationSteps: p.installationSteps ?? null,
+    accessories: p.accessories ?? null,
+    sketch: p.sketch ?? null,
+    descriptions: p.descriptions ?? [],
     category: populate && p.category ? { id: p.category.id, documentId: p.category.documentId, title: p.category.title, slug: p.category.slug } : undefined,
     gallery: populate && p.gallery
       ? p.gallery.sort((a: any, b: any) => a.order - b.order).map((g: any) => formatMedia(g.upload))
@@ -65,7 +65,7 @@ export async function createProduct(req: Request, res: Response, next: NextFunct
   try {
     const {
       title, description, slug, rating, totalRatings, categoryId,
-      variants, coreSpecifications, electricalSpecifications, keyFeatures, daigram,
+      dimension, installationSteps, accessories, sketch, descriptions,
       galleryIds,
     } = req.body;
 
@@ -77,11 +77,11 @@ export async function createProduct(req: Request, res: Response, next: NextFunct
         rating: rating ?? 0,
         totalRatings: totalRatings ?? null,
         categoryId: categoryId ?? null,
-        variants: variants ?? [],
-        coreSpecifications: coreSpecifications ?? [],
-        electricalSpecifications: electricalSpecifications ?? [],
-        keyFeatures: keyFeatures ?? [],
-        daigram: daigram ?? null,
+        dimension: dimension ?? null,
+        installationSteps: installationSteps ?? null,
+        accessories: accessories ?? null,
+        sketch: sketch ?? null,
+        descriptions: descriptions ?? [],
         gallery: galleryIds?.length
           ? { create: galleryIds.map((id: number, i: number) => ({ uploadId: id, order: i })) }
           : undefined,
@@ -98,11 +98,10 @@ export async function updateProduct(req: Request, res: Response, next: NextFunct
     const id = Number(req.params.id);
     const {
       title, description, slug, rating, totalRatings, categoryId,
-      variants, coreSpecifications, electricalSpecifications, keyFeatures, daigram,
+      dimension, installationSteps, accessories, sketch, descriptions,
       galleryIds,
     } = req.body;
 
-    // Replace gallery if provided
     if (galleryIds !== undefined) {
       await prisma.productGallery.deleteMany({ where: { productId: id } });
       if (galleryIds.length > 0) {
@@ -121,11 +120,11 @@ export async function updateProduct(req: Request, res: Response, next: NextFunct
         ...(rating !== undefined && { rating }),
         ...(totalRatings !== undefined && { totalRatings }),
         ...(categoryId !== undefined && { categoryId }),
-        ...(variants !== undefined && { variants }),
-        ...(coreSpecifications !== undefined && { coreSpecifications }),
-        ...(electricalSpecifications !== undefined && { electricalSpecifications }),
-        ...(keyFeatures !== undefined && { keyFeatures }),
-        ...(daigram !== undefined && { daigram }),
+        ...(dimension !== undefined && { dimension }),
+        ...(installationSteps !== undefined && { installationSteps }),
+        ...(accessories !== undefined && { accessories }),
+        ...(sketch !== undefined && { sketch }),
+        ...(descriptions !== undefined && { descriptions }),
       },
       include: populateInclude,
     });

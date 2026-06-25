@@ -1,90 +1,85 @@
 /** @format */
 
-"use client";
-
 import BrightestLineup from "@/app/components/BrightestLineup";
-import { use } from "react";
 import ProductGallery from "./components/ProductGallery";
 import ProductInfo from "./components/ProductInfo";
+import { getProduct } from "@/lib/queries/product";
+import { getImageUrl } from "@/lib/strapi";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const ProductPage = ({ params }: ProductPageProps) => {
-  const { slug } = use(params); // ✅ unwrap the promise
+const ProductPage = async ({ params }: ProductPageProps) => {
+  const { slug } = await params;
+  const raw = await getProduct(slug);
+
+  if (!raw) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">Product not found.</p>
+      </div>
+    );
+  }
 
   const product = {
-    id: "cob-deep-cone-spotlight",
-    name: "COB Deep Cone LED Spotlight – 12W Model",
-    rating: 4.6,
-    totalRatings: 41,
-    variants: [
-      { power: "7W", selected: false },
-      { power: "12W", selected: true },
-      { power: "18W", selected: false },
-      { power: "20W", selected: false },
-    ],
-    images: [
-      "https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/2312999/pexels-photo-2312999.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/1067465/pexels-photo-1067465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/276617/pexels-photo-276617.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/269294/pexels-photo-269294.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/276617/pexels-photo-276617.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/7317336/pexels-photo-7317336.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/5337502/pexels-photo-5337502.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    breadcrumb: "Category > Led Profiles Lights > Condenser Union",
+    id: raw.documentId,
+    name: raw.title,
+    description: raw.description ?? "",
+    rating: raw.rating ?? 0,
+    totalRatings: raw.totalRatings ?? 0,
+    images: (raw.gallery ?? []).map((g: any) => getImageUrl(g.url)),
+    dimension: raw.dimension
+      ? {
+          text: raw.dimension.text ?? "",
+          imageUrl: raw.dimension.image ? getImageUrl(raw.dimension.image.url) : null,
+        }
+      : null,
+    installationSteps: raw.installationSteps?.image
+      ? { imageUrl: getImageUrl(raw.installationSteps.image.url) }
+      : null,
+    accessories: raw.accessories?.image
+      ? { imageUrl: getImageUrl(raw.accessories.image.url) }
+      : null,
+    sketch: raw.sketch
+      ? {
+          image1Url: raw.sketch.image1 ? getImageUrl(raw.sketch.image1.url) : null,
+          title: raw.sketch.title ?? "",
+          image2Url: raw.sketch.image2 ? getImageUrl(raw.sketch.image2.url) : null,
+        }
+      : null,
+    descriptions: raw.descriptions ?? [],
+    category: raw.category ?? null,
   };
 
   return (
     <>
-      <div className='w-full bg-[#f3f3f3]'>
-        <div
-          className='
-      mx-auto
-      px-3 sm:px-6 lg:px-12 xl:px-20
-      py-2
-    '
-        >
-          <nav
-            className='
-        flex flex-wrap items-center
-        gap-x-2 gap-y-1
-        text-sm sm:text-base
-      '
-          >
-            <span className='text-gray-500 font-medium whitespace-nowrap'>
-              Products
-            </span>
-
-            <span className='text-gray-400 font-medium'>›</span>
-
-            <span className='text-gray-500 font-medium whitespace-nowrap'>
-              LED Profile Lights
-            </span>
-
-            <span className='text-gray-400 font-medium'>›</span>
-
-            <span className='text-black font-medium truncate max-w-[200px] sm:max-w-none'>
-              Condenser Union
-            </span>
+      <div className="w-full bg-[#f3f3f3]">
+        <div className="mx-auto px-3 sm:px-6 lg:px-12 xl:px-20 py-2">
+          <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:text-base">
+            <span className="text-gray-500 font-medium whitespace-nowrap">Products</span>
+            <span className="text-gray-400 font-medium">›</span>
+            {product.category && (
+              <>
+                <span className="text-gray-500 font-medium whitespace-nowrap">{product.category.title}</span>
+                <span className="text-gray-400 font-medium">›</span>
+              </>
+            )}
+            <span className="text-black font-medium truncate max-w-[200px] sm:max-w-none">{product.name}</span>
           </nav>
         </div>
       </div>
 
-      <section className='bg-white text-black'>
-        {/* <h1>Product: {slug}</h1> */}
-
-        <div className=' py-12 sm:py-10 lg:py-15 px-4 sm:px-6 lg:px-12 xl:px-20'>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 max-h-screen overflow-hidden'>
+      <section className="bg-white text-black">
+        <div className="py-12 sm:py-10 lg:py-15 px-4 sm:px-6 lg:px-12 xl:px-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 max-h-screen overflow-hidden">
             <ProductGallery images={product.images} />
             <ProductInfo product={product} />
           </div>
         </div>
       </section>
-      <section className='bg-white text-black'>
+
+      <section className="bg-white text-black">
         <BrightestLineup />
       </section>
     </>

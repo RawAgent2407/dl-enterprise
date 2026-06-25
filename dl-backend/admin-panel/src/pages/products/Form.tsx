@@ -7,21 +7,17 @@ import GalleryUpload from '../../components/GalleryUpload';
 import ImageUpload from '../../components/ImageUpload';
 
 interface Upload { id: number; url: string; name: string }
-interface KV { label: string; value: string }
-interface Variant { type: string; values: string }
+
+interface DescriptionItem { type: string; value: string }
 
 interface FormData {
   title: string;
   slug: string;
   description: string;
-  rating: number;
-  totalRatings: number;
   categoryId: string;
-  coreSpecifications: KV[];
-  electricalSpecifications: KV[];
-  keyFeatures: { value: string }[];
-  variants: Variant[];
-  daigramDescription: string;
+  dimensionText: string;
+  descriptions: DescriptionItem[];
+  sketchTitle: string;
 }
 
 function slugify(s: string) {
@@ -33,23 +29,21 @@ export default function ProductForm() {
   const isEdit = Boolean(id);
   const navigate = useNavigate();
   const qc = useQueryClient();
+
   const [gallery, setGallery] = useState<Upload[]>([]);
-  const [daigramImage, setDaigramImage] = useState<Upload | null>(null);
+  const [dimensionImage, setDimensionImage] = useState<Upload | null>(null);
+  const [installationImage, setInstallationImage] = useState<Upload | null>(null);
+  const [accessoriesImage, setAccessoriesImage] = useState<Upload | null>(null);
+  const [sketchImage1, setSketchImage1] = useState<Upload | null>(null);
+  const [sketchImage2, setSketchImage2] = useState<Upload | null>(null);
 
   const { register, handleSubmit, setValue, watch, control } = useForm<FormData>({
     defaultValues: {
-      coreSpecifications: [{ label: '', value: '' }],
-      electricalSpecifications: [{ label: '', value: '' }],
-      keyFeatures: [{ value: '' }],
-      variants: [{ type: '', values: '' }],
+      descriptions: [{ type: '', value: '' }],
     },
   });
 
-  const coreSpecs = useFieldArray({ control, name: 'coreSpecifications' });
-  const elecSpecs = useFieldArray({ control, name: 'electricalSpecifications' });
-  const keyFeats = useFieldArray({ control, name: 'keyFeatures' });
-  const variants = useFieldArray({ control, name: 'variants' });
-
+  const descs = useFieldArray({ control, name: 'descriptions' });
   const title = watch('title', '');
 
   const { data: categories } = useQuery({
@@ -74,16 +68,21 @@ export default function ProductForm() {
     setValue('title', existing.title);
     setValue('slug', existing.slug);
     setValue('description', existing.description ?? '');
-    setValue('rating', existing.rating ?? 0);
-    setValue('totalRatings', existing.totalRatings ?? 0);
     setValue('categoryId', existing.category?.id?.toString() ?? '');
-    if (existing.coreSpecifications?.length) setValue('coreSpecifications', existing.coreSpecifications);
-    if (existing.electricalSpecifications?.length) setValue('electricalSpecifications', existing.electricalSpecifications);
-    if (existing.keyFeatures?.length) setValue('keyFeatures', existing.keyFeatures);
-    if (existing.variants?.length) setValue('variants', existing.variants.map((v: any) => ({ type: v.type, values: Array.isArray(v.values) ? v.values.join(', ') : v.values })));
+
+    if (existing.dimension) {
+      setValue('dimensionText', existing.dimension.text ?? '');
+      if (existing.dimension.image) setDimensionImage(existing.dimension.image);
+    }
+    if (existing.installationSteps?.image) setInstallationImage(existing.installationSteps.image);
+    if (existing.accessories?.image) setAccessoriesImage(existing.accessories.image);
+    if (existing.sketch) {
+      setValue('sketchTitle', existing.sketch.title ?? '');
+      if (existing.sketch.image1) setSketchImage1(existing.sketch.image1);
+      if (existing.sketch.image2) setSketchImage2(existing.sketch.image2);
+    }
+    if (existing.descriptions?.length) setValue('descriptions', existing.descriptions);
     if (existing.gallery?.length) setGallery(existing.gallery);
-    if (existing.daigram?.imageId) setDaigramImage({ id: existing.daigram.imageId, url: `/uploads/...`, name: 'diagram' });
-    setValue('daigramDescription', existing.daigram?.description ?? '');
   }, [existing]);
 
   const save = useMutation({
@@ -92,16 +91,23 @@ export default function ProductForm() {
         title: values.title,
         slug: values.slug,
         description: values.description,
-        rating: Number(values.rating),
-        totalRatings: values.totalRatings ? Number(values.totalRatings) : null,
         categoryId: values.categoryId ? Number(values.categoryId) : null,
-        coreSpecifications: values.coreSpecifications.filter((r) => r.label),
-        electricalSpecifications: values.electricalSpecifications.filter((r) => r.label),
-        keyFeatures: values.keyFeatures.filter((r) => r.value),
-        variants: values.variants
-          .filter((v) => v.type)
-          .map((v) => ({ type: v.type, values: v.values.split(',').map((s) => s.trim()).filter(Boolean) })),
-        daigram: { imageId: daigramImage?.id ?? null, description: values.daigramDescription || null },
+        dimension: {
+          text: values.dimensionText || '',
+          image: dimensionImage ? { id: dimensionImage.id, url: dimensionImage.url } : null,
+        },
+        installationSteps: {
+          image: installationImage ? { id: installationImage.id, url: installationImage.url } : null,
+        },
+        accessories: {
+          image: accessoriesImage ? { id: accessoriesImage.id, url: accessoriesImage.url } : null,
+        },
+        sketch: {
+          image1: sketchImage1 ? { id: sketchImage1.id, url: sketchImage1.url } : null,
+          title: values.sketchTitle || '',
+          image2: sketchImage2 ? { id: sketchImage2.id, url: sketchImage2.url } : null,
+        },
+        descriptions: values.descriptions.filter((d) => d.type || d.value),
         galleryIds: gallery.map((u) => u.id),
       };
       if (isEdit) return api.put(`/products/${id}`, payload);
@@ -126,7 +132,7 @@ export default function ProductForm() {
       <h1 className="text-2xl font-bold text-gray-800 mb-6">{isEdit ? 'Edit Product' : 'New Product'}</h1>
       <form onSubmit={handleSubmit((v) => save.mutate(v))} className="space-y-6">
 
-        {/* Basic info */}
+        {/* Basic Info */}
         <section className="bg-white rounded-xl shadow p-6 space-y-4">
           <h2 className="font-semibold text-gray-700">Basic Info</h2>
           <div className="grid grid-cols-2 gap-4">
@@ -141,92 +147,68 @@ export default function ProductForm() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea {...register('description')} rows={3} className={inputCls} />
+            <textarea {...register('description')} rows={3} className={inputCls} placeholder="Short product description shown on product page" />
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-              <select {...register('categoryId')} className={inputCls}>
-                <option value="">— None —</option>
-                {categories?.map((c: any) => <option key={c.id} value={c.id}>{c.title}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-              <input type="number" step="0.1" min="0" max="5" {...register('rating')} className={inputCls} />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Total Ratings</label>
-              <input type="number" {...register('totalRatings')} className={inputCls} />
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <select {...register('categoryId')} className={inputCls}>
+              <option value="">— None —</option>
+              {categories?.map((c: any) => <option key={c.id} value={c.id}>{c.title}</option>)}
+            </select>
           </div>
         </section>
 
         {/* Gallery */}
         <section className="bg-white rounded-xl shadow p-6">
-          <h2 className="font-semibold text-gray-700 mb-4">Gallery</h2>
+          <h2 className="font-semibold text-gray-700 mb-4">Images</h2>
           <GalleryUpload value={gallery} onChange={setGallery} />
         </section>
 
-        {/* Variants */}
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
-          <h2 className="font-semibold text-gray-700">Variants</h2>
-          {variants.fields.map((f, i) => (
-            <div key={f.id} className="flex gap-3 items-start">
-              <input {...register(`variants.${i}.type`)} placeholder="Type (e.g. Color)" className={`${inputCls} w-40`} />
-              <input {...register(`variants.${i}.values`)} placeholder="Values (comma-separated)" className={inputCls} />
-              <button type="button" onClick={() => variants.remove(i)} className={removeBtn}>✕</button>
-            </div>
-          ))}
-          <button type="button" onClick={() => variants.append({ type: '', values: '' })} className={addBtn}>+ Add variant</button>
-        </section>
-
-        {/* Core Specifications */}
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
-          <h2 className="font-semibold text-gray-700">Core Specifications</h2>
-          {coreSpecs.fields.map((f, i) => (
-            <div key={f.id} className="flex gap-3 items-start">
-              <input {...register(`coreSpecifications.${i}.label`)} placeholder="Label" className={`${inputCls} w-40`} />
-              <input {...register(`coreSpecifications.${i}.value`)} placeholder="Value" className={inputCls} />
-              <button type="button" onClick={() => coreSpecs.remove(i)} className={removeBtn}>✕</button>
-            </div>
-          ))}
-          <button type="button" onClick={() => coreSpecs.append({ label: '', value: '' })} className={addBtn}>+ Add row</button>
-        </section>
-
-        {/* Electrical Specifications */}
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
-          <h2 className="font-semibold text-gray-700">Electrical Specifications</h2>
-          {elecSpecs.fields.map((f, i) => (
-            <div key={f.id} className="flex gap-3 items-start">
-              <input {...register(`electricalSpecifications.${i}.label`)} placeholder="Label" className={`${inputCls} w-40`} />
-              <input {...register(`electricalSpecifications.${i}.value`)} placeholder="Value" className={inputCls} />
-              <button type="button" onClick={() => elecSpecs.remove(i)} className={removeBtn}>✕</button>
-            </div>
-          ))}
-          <button type="button" onClick={() => elecSpecs.append({ label: '', value: '' })} className={addBtn}>+ Add row</button>
-        </section>
-
-        {/* Key Features */}
-        <section className="bg-white rounded-xl shadow p-6 space-y-3">
-          <h2 className="font-semibold text-gray-700">Key Features</h2>
-          {keyFeats.fields.map((f, i) => (
-            <div key={f.id} className="flex gap-3 items-start">
-              <input {...register(`keyFeatures.${i}.value`)} placeholder="Feature" className={inputCls} />
-              <button type="button" onClick={() => keyFeats.remove(i)} className={removeBtn}>✕</button>
-            </div>
-          ))}
-          <button type="button" onClick={() => keyFeats.append({ value: '' })} className={addBtn}>+ Add feature</button>
-        </section>
-
-        {/* Diagram */}
+        {/* Dimension */}
         <section className="bg-white rounded-xl shadow p-6 space-y-4">
-          <h2 className="font-semibold text-gray-700">Diagram</h2>
-          <ImageUpload value={daigramImage} onChange={setDaigramImage} label="Diagram Image" />
+          <h2 className="font-semibold text-gray-700">Dimension</h2>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Diagram Description</label>
-            <textarea {...register('daigramDescription')} rows={2} className={inputCls} />
+            <label className="block text-sm font-medium text-gray-700 mb-1">Dimension Text (e.g. 120 x 160cms)</label>
+            <input {...register('dimensionText')} placeholder="e.g. 120 x 160cms" className={inputCls} />
           </div>
+          <ImageUpload value={dimensionImage} onChange={setDimensionImage} label="Dimension Image" />
+        </section>
+
+        {/* Installation Steps */}
+        <section className="bg-white rounded-xl shadow p-6">
+          <h2 className="font-semibold text-gray-700 mb-4">Installation Steps</h2>
+          <ImageUpload value={installationImage} onChange={setInstallationImage} label="Installation Steps Image" />
+        </section>
+
+        {/* Accessories */}
+        <section className="bg-white rounded-xl shadow p-6">
+          <h2 className="font-semibold text-gray-700 mb-4">Accessories</h2>
+          <ImageUpload value={accessoriesImage} onChange={setAccessoriesImage} label="Accessories Image" />
+        </section>
+
+        {/* Sketch */}
+        <section className="bg-white rounded-xl shadow p-6 space-y-4">
+          <h2 className="font-semibold text-gray-700">Sketch</h2>
+          <ImageUpload value={sketchImage1} onChange={setSketchImage1} label="Sketch Image 1" />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <input {...register('sketchTitle')} placeholder="e.g. T5 New LED Tube" className={inputCls} />
+          </div>
+          <ImageUpload value={sketchImage2} onChange={setSketchImage2} label="Sketch Image 2" />
+        </section>
+
+        {/* Descriptions */}
+        <section className="bg-white rounded-xl shadow p-6 space-y-3">
+          <h2 className="font-semibold text-gray-700">Descriptions</h2>
+          <p className="text-xs text-gray-500">Each entry shows as "Type : Value" on the product page (e.g. "Cutout Size : 66 mm")</p>
+          {descs.fields.map((f, i) => (
+            <div key={f.id} className="flex gap-3 items-start">
+              <input {...register(`descriptions.${i}.type`)} placeholder="Type (e.g. Cutout Size)" className={`${inputCls} w-48`} />
+              <input {...register(`descriptions.${i}.value`)} placeholder="Value (e.g. 66 mm or 75 mm)" className={inputCls} />
+              <button type="button" onClick={() => descs.remove(i)} className={removeBtn}>✕</button>
+            </div>
+          ))}
+          <button type="button" onClick={() => descs.append({ type: '', value: '' })} className={addBtn}>+ Add description</button>
         </section>
 
         <div className="flex gap-3">
