@@ -11,18 +11,14 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className='w-full bg-[#FFFFFE] border-t-2 border-[#0000000A] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20'>
-      <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12'>
+    <section className='flex flex-col align-start justify-start md:align-center md:justify-center gap-10 lg:gap-20 section-gap-removeal'>
         {/* Header */}
-        <div className='text-center max-w-4xl mx-auto mb-10 sm:mb-14 lg:mb-20'>
-          <h2 className='text-[22px] sm:text-[32px] lg:text-[42px]   font-medium leading-snug text-[#050b16] mb-4'>
-            Proven Excellence in Every Light Shipped
+        <div className='text-center mx-auto'>
+          <h2>
+            Proven Excellence in Every Valve Shipped
           </h2>
-          <p className='text-[14px] sm:text-[15px] lg:text-[17px]  text-[#364151] leading-relaxed'>
-            Delivering unmatched reliability, quality compliance, and customer
-            satisfaction through every product we create. Our commitment to
-            excellence is reflected in the trust of our customers and industry
-            recognition.
+          <p className='subheadline mt-4 text-center max-w-full md:max-w-[60%] mx-auto'>
+            Delivering unmatched reliability, quality compliance, and customer satisfaction through every product we create. Our commitment to excellence is reflected in the trust of our customers and industry recognition
           </p>
         </div>
 
@@ -56,7 +52,6 @@ export default function StatsSection() {
             </div>
           ))}
         </div>
-      </div>
     </section>
   );
 }

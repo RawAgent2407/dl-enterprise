@@ -52,7 +52,7 @@ export default function ProductFilters({ categorySlug }: { categorySlug: string 
             placeholder="SEARCH PRODUCTS"
             value={search}
             onChange={(e) => { setPage(1); setSearch(e.target.value); }}
-            className="w-full h-11 pl-11 pr-4 border rounded-xs text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-500"
+            className="w-full h-11 pl-11 pr-4 border rounded-xs text-sm placeholder-gray-400 focus:outline-hidden focus:ring-1 focus:ring-red-500"
           />
         </div>
         <select

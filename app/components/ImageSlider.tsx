@@ -3,7 +3,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 const slides = [
@@ -23,16 +23,36 @@ export default function ImageSlider() {
     setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) =>
+        prev === slides.length - 1 ? 0 : prev + 1
+      );
+    }, 3000); // 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className='relative w-full   overflow-hidden'>
       {/* Image */}
-      <div className='w-full h-[90vh]  relative'>
-        <Image
-          src={slides[currentIndex]}
-          alt={`Slide ${currentIndex + 1}`}
-          fill
-          className=' object-cover'
-        />
+      {/* @todo: change height for different screen sizes */}
+      <div className="w-full h-[90vh] overflow-hidden relative">
+        <div
+          className="flex h-full transition-transform duration-1000 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div key={index} className="min-w-full h-full relative">
+              <Image
+                src={slide}
+                alt={`Slide ${index + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Navigation Buttons */}
@@ -45,7 +65,7 @@ export default function ImageSlider() {
         </button>
         <button
           onClick={nextSlide}
-          className='bg-red-500 text-white p-2  shadow hover:bg-red-400 transition '
+          className='bg-brand-primary text-white p-2  shadow hover:bg-brand-primaryHover transition '
         >
           <HiArrowRight size={24} />
         </button>

@@ -60,7 +60,7 @@ export default function DesktopMegaMenu({ isProductsOpen, setIsProductsOpen, meg
                             className="font-dm flex gap-3 p-3 mx-2 border border-[#E6E7EA] hover:shadow-md cursor-pointer"
                             onClick={handleRedirect(`/product/${prod?.slug || 404}`)}
                         >
-                            <div className="flex-shrink-0 w-16 h-16 border border-[#00000014]">
+                            <div className="shrink-0 w-16 h-16 border border-[#00000014]">
                                 <img
                                     src={prod?.gallery ? getImageUrl(prod?.gallery[0]?.url) : '/placeholder-image.png'}
                                     alt={prod?.title}

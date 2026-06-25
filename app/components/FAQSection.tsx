@@ -2,7 +2,7 @@
 
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { LuChevronDown } from "react-icons/lu";
 import { useState } from "react";
 
 const faqs = [
@@ -37,7 +37,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className='w-full bg-[#f3f3f3]  py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20'>
+    <section className='w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 xl:px-20'>
       <div className='px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20'>
           {/* LEFT CONTENT */}
@@ -65,7 +65,7 @@ export default function FAQSection() {
                     <span className='text-base sm:text-lg font-medium text-black'>
                       {faq.question}
                     </span>
-                    <ChevronDown
+                    <LuChevronDown
                       className={`h-5 w-5 text-gray-500 transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}

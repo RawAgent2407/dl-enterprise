@@ -6,11 +6,11 @@
 
 "use client";
 import {
-  FaEnvelope,
-  FaFileContract,
-  FaMapMarkerAlt,
-  FaPhone,
-} from "react-icons/fa";
+  LuMail,
+  LuFile,
+  LuMapPinMinus,
+  LuPhone,
+} from "react-icons/lu";
 
 const GeneralTermsPage = () => {
   return (
@@ -29,7 +29,7 @@ const GeneralTermsPage = () => {
           {/* Acceptance of Terms */}
           <div>
             <h2 className='text-3xl font-medium text-gray-800 mb-4 flex items-center gap-2'>
-              <FaFileContract /> 1. Acceptance of Terms
+              <LuFile /> 1. Acceptance of Terms
             </h2>
             <p className='text-gray-700'>
               By accessing and using DL Enterprise's website and services, you
@@ -151,14 +151,14 @@ const GeneralTermsPage = () => {
           {/* Contact Information */}
           <div>
             <h2 className='text-3xl font-medium text-gray-800 mb-4 flex items-center gap-2'>
-              <FaPhone /> 10. Contact Information
+              <LuPhone /> 10. Contact Information
             </h2>
             <p className='text-gray-700 mb-4'>
               For questions about these terms, please contact us at:
             </p>
             <div className='bg-gray-100 p-6 rounded-lg shadow-md text-gray-700 space-y-1'>
               <p>
-                <FaMapMarkerAlt className='inline mr-2 text-red-600' />
+                <LuMapPinMinus className='inline mr-2 text-red-600' />
                 <strong>DL Enterprise</strong>
               </p>
               <p>78 Gajsinani Industrial Park</p>
@@ -166,11 +166,11 @@ const GeneralTermsPage = () => {
               <p>Vatva, Ahmedabad - 382440</p>
               <p>Gujarat, India</p>
               <p>
-                <FaPhone className='inline mr-2 text-red-600' />
+                <LuPhone className='inline mr-2 text-red-600' />
                 +91-49260-51745
               </p>
               <p>
-                <FaEnvelope className='inline mr-2 text-red-600' />
+                <LuMail className='inline mr-2 text-red-600' />
                 info@dlent04.com
               </p>
             </div>

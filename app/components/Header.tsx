@@ -2,22 +2,28 @@
 
 "use client";
 
-import { ChevronDown, Menu, X } from "lucide-react";
+import { LuMenu, LuX } from "react-icons/lu";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-
-const products = [
-  { label: "LED Tube Lights", href: "/product/led-tube-lights" },
-  { label: "COB Lights", href: "/product/cob-lights" },
-  { label: "LED Profiles", href: "/product/led-profiles" },
-  { label: "Panel Lights", href: "/product/panel-lights" },
-];
-
-const Header = () => {
+import { useEffect, useState } from "react";
+import DesktopMenu from "./DesktopMenu";
+import MobileMegaMenu from "./MobileMegaMenu";
+interface HeaderProps {
+  megaMenuData: any[];
+}
+const Header: React.FC<HeaderProps> = ({ megaMenuData }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // Cleanup (important when navigating pages)
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isMobileMenuOpen]);
 
   return (
     <header className='sticky top-0 z-50 bg-white text-black shadow-sm'>
@@ -38,222 +44,44 @@ const Header = () => {
             </Link>
 
             {/* DESKTOP NAV */}
-            <nav className='hidden md:flex items-center gap-6 lg:gap-10'>
-              <Link href='/' className='nav-link'>
-                Home
-              </Link>
-
-              {/* PRODUCTS DROPDOWN */}
-              <div
-                className='relative'
-                onMouseEnter={() => setIsProductsOpen(true)}
-                onMouseLeave={() => setIsProductsOpen(false)}
-              >
-                {/* Trigger */}
-                <button
-                  className='
-      flex items-center gap-1
-      text-sm font-medium text-gray-800
-      hover:text-red-600
-      transition-colors
-    '
-                  aria-haspopup='true'
-                  aria-expanded={isProductsOpen}
-                >
-                  Products
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      isProductsOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                {/* Dropdown */}
-                <div
-                  className={`
-      absolute left-0 top-full mt-3 w-60
-      rounded-xl border border-gray-100
-      bg-white shadow-lg
-      transition-all duration-200 ease-out
-      ${
-        isProductsOpen
-          ? "opacity-100 translate-y-0 visible"
-          : "opacity-0 -translate-y-2 invisible"
-      }
-    `}
-                >
-                  <ul className='py-2'>
-                    {products.map((item) => (
-                      <li key={item.label}>
-                        <Link
-                          href={item.href}
-                          className='
-              block px-4 py-2.5
-              text-sm text-gray-700
-              hover:bg-red-50 hover:text-red-600
-              transition-colors
-            '
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <Link href='/catalog' className='nav-link'>
-                Category
-              </Link>
-
-              <a
-                href='https://drive.google.com/file/d/1E9cvwhsgCtO53MkM90gqhIxyP-VTSUuE/view?usp=drivesdk'
-                className='nav-link'
-                target='_blank'
-              >
-                Catalogue
-              </a>
-              <Link href='/about-us' className='nav-link'>
-                About
-              </Link>
-              {/* <Link href="/contact-us" className="nav-link">
-                Contact Us
-              </Link> */}
-            </nav>
+            <DesktopMenu megaMenuData={megaMenuData} />
 
             {/* RIGHT */}
             <div className='flex items-center gap-4'>
               <Link
                 href='/contact-us'
-                className='hidden sm:inline-flex  bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-700 transition'
+                className='hidden md:inline-flex  bg-black px-5 py-2 text-sm font-medium text-white hover:bg-gray-700 transition'
               >
                 Contact Us
               </Link>
-
-              <button
-                className='md:hidden'
-                onClick={() => setIsMobileMenuOpen(true)}
-              >
-                <Menu />
-              </button>
+              {/* MOBILE MENU BUTTON */}
+              {
+                isMobileMenuOpen ? (
+                  <button
+                    className='md:hidden'
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <LuX />
+                  </button>
+                ) : (
+                  <button
+                    className='md:hidden'
+                    onClick={() => setIsMobileMenuOpen(true)}
+                  >
+                    <LuMenu />
+                  </button>
+                )
+              }
             </div>
           </div>
         </div>
-      </div>
+        {/* MOBILE DRAWER */}
 
-      {/* MOBILE DRAWER */}
-      <div
-        className={`fixed inset-0 z-50 md:hidden transition ${
-          isMobileMenuOpen ? "visible" : "invisible"
-        }`}
-      >
-        {/* OVERLAY */}
-        <div
-          className={`absolute inset-0 bg-black/40 transition-opacity ${
-            isMobileMenuOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setIsMobileMenuOpen(false)}
+        <MobileMegaMenu
+          open={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+          megaMenuData={megaMenuData}
         />
-
-        {/* DRAWER */}
-        <div
-          className={`absolute left-0 top-0 h-full w-[90%] max-w-sm bg-white shadow-xl transition-transform duration-300 ${
-            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          {/* HEADER */}
-          <div className='flex items-center justify-between px-4 py-4 shadow-sm'>
-            <Image src='/logo.svg' alt='Logo' width={120} height={30} />
-            <button onClick={() => setIsMobileMenuOpen(false)}>
-              <X />
-            </button>
-          </div>
-
-          {/* CONTENT */}
-          <div className='py-4 space-y-2 px-2 overflow-y-auto h-[calc(100vh-80px)]'>
-            {/* HOME */}
-            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
-              <Link
-                href='/'
-                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
-              >
-                Home
-              </Link>
-            </div>
-
-            {/* PRODUCTS */}
-            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
-              <button
-                className='w-full flex items-center justify-between text-base font-medium text-black group-hover:text-red-600 transition-colors'
-                onClick={() => setIsMobileProductsOpen(!isMobileProductsOpen)}
-              >
-                Products
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
-                    isMobileProductsOpen
-                      ? "rotate-180 text-red-600"
-                      : "group-hover:text-red-600"
-                  }`}
-                />
-              </button>
-
-              {isMobileProductsOpen && (
-                <div className='mt-3 space-y-2 border-l-2 border-red-500 pl-4'>
-                  {products.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className='block text-sm text-gray-700 hover:text-red-600 transition-colors'
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* CATALOGUE */}
-            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
-              <Link
-                href='/catalog'
-                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
-              >
-                Catalogue
-              </Link>
-            </div>
-
-            {/* ABOUT */}
-            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
-              <Link
-                href='/about-us'
-                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
-              >
-                About
-              </Link>
-            </div>
-
-            {/* ABOUT */}
-            <div className='group bg-gray-50 px-4 py-3  transition-all shadow-sm hover:bg-red-50'>
-              <Link
-                href='/contact-us'
-                className='block text-base font-medium text-black group-hover:text-red-600 transition-colors'
-              >
-                Contact Us
-              </Link>
-            </div>
-
-            {/* CTA */}
-            <div className='group'>
-              <Link
-                href='/contact-us'
-                className='block  bg-black text-white text-center py-3 font-medium mt-4
-               hover:bg-red-600 transition-colors'
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 /** @format */
 
 "use client";
-import { ChevronDown } from "lucide-react";
+import { LuChevronDown } from "react-icons/lu";
 import { useState } from "react";
 
 const QATab = () => {
@@ -66,7 +66,7 @@ const QATab = () => {
                 {item.question}
               </span>
 
-              <ChevronDown
+              <LuChevronDown
                 className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
                   openIndex === index ? "rotate-180" : ""
                 }`}

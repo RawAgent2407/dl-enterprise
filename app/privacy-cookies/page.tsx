@@ -6,10 +6,10 @@
 
 "use client";
 import {
-  FaCookieBite,
-  FaExclamationTriangle,
-  FaUserShield,
-} from "react-icons/fa";
+  LuCookie,
+  LuTriangleAlert,
+  LuShield,
+} from "react-icons/lu";
 
 const PrivacyCookiesPage = () => {
   const cookieTypes = [
@@ -124,7 +124,7 @@ const PrivacyCookiesPage = () => {
             </h2>
             <div className='mb-6'>
               <h3 className='text-2xl font-medium text-gray-800 mb-2 flex items-center gap-2'>
-                <FaCookieBite /> What Are Cookies?
+                <LuCookie /> What Are Cookies?
               </h3>
               <p className='text-gray-700'>
                 Cookies are small text files stored on your device when you
@@ -134,7 +134,7 @@ const PrivacyCookiesPage = () => {
             </div>
 
             <h3 className='text-2xl font-medium text-gray-800 mb-4 flex items-center gap-2'>
-              <FaCookieBite /> Types of Cookies We Use
+              <LuCookie className="text-red-600" /> Types of Cookies We Use
             </h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6'>
               {cookieTypes.map((cookie) => (
@@ -160,7 +160,7 @@ const PrivacyCookiesPage = () => {
           {/* Rights */}
           <div>
             <h2 className='text-3xl font-medium text-gray-800 mb-4 flex items-center gap-2'>
-              <FaUserShield /> 8. Your Rights
+              <LuShield /> 8. Your Rights
             </h2>
             <ul className='list-disc list-inside space-y-1 text-gray-700'>
               {rights.map((right) => (
@@ -172,7 +172,7 @@ const PrivacyCookiesPage = () => {
           {/* Contact */}
           <div>
             <h2 className='text-3xl font-medium text-gray-800 mb-4 flex items-center gap-2'>
-              <FaExclamationTriangle /> 13. Contact Us
+              <LuTriangleAlert /> 13. Contact Us
             </h2>
             <div className='bg-white p-6 rounded-lg shadow-md text-gray-700'>
               <p>

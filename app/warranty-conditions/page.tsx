@@ -5,7 +5,7 @@
  */
 
 "use client";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { LuCircleCheck, LuClock } from "react-icons/lu";
 
 const WarrantyConditionsPage = () => {
   const warranties = [
@@ -91,7 +91,7 @@ const WarrantyConditionsPage = () => {
                   key={item}
                   className='flex items-center gap-2 text-green-700'
                 >
-                  <FaCheckCircle className='flex-shrink-0' /> {item}
+                  <LuCircleCheck className='shrink-0' /> {item}
                 </li>
               ))}
             </ul>
@@ -105,7 +105,7 @@ const WarrantyConditionsPage = () => {
             <ul className='space-y-2'>
               {notCovered.map((item) => (
                 <li key={item} className='flex items-center gap-2 text-red-700'>
-                  <FaTimesCircle className='flex-shrink-0' /> {item}
+                  <LuCircleCheck className='shrink-0' /> {item}
                 </li>
               ))}
             </ul>

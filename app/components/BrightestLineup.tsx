@@ -2,39 +2,14 @@
 
 "use client";
 
-import Image from "next/image";
+import { getImageUrl } from "@/lib/strapi";
+import { LuStar } from "react-icons/lu";
 
-const products = [
-  {
-    id: 1,
-    title: "T5 Tube Light",
-    watt: "7 Watt",
-    image: "/images/product3.png",
-  },
-  {
-    id: 2,
-    title: "T5 Tube Light",
-    watt: "7 Watt",
-    image: "/images/product1.png",
-  },
-  {
-    id: 3,
-    title: "T5 Tube Light",
-    watt: "7 Watt",
-    image: "/images/product2.png",
-  },
-  {
-    id: 4,
-    title: "T5 Tube Light",
-    watt: "7 Watt",
-    image: "/images/product2.png",
-  },
-];
-
-export default function BrightestLineup() {
+export default function BrightestLineup({ recommendedProducts }: any) {
+  recommendedProducts = recommendedProducts?.data || [];
   return (
-    <section className='w-full bg-white pb-12 sm:pb-16 lg:pb-20'>
-      <div className=' px-4 sm:px-6 lg:px-12'>
+    <section className='w-full bg-white'>
+      <div className=''>
         {/* Heading */}
         <div className='text-center max-w-3xl mx-auto mb-10 sm:mb-14'>
           <h2 className='text-2xl sm:text-3xl lg:text-4xl font-medium text-gray-900'>
@@ -47,48 +22,56 @@ export default function BrightestLineup() {
         </div>
 
         {/* Product Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 lg:gap-8'>
-          {products.map((item) => (
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-6 lg:gap-8'>
+          {recommendedProducts?.map((item:any) => (
             <div
               key={item.id}
-              className='bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden'
+              className='bg-white rounded-s product-card-box transition overflow-hidden'
+              style={{
+                border: "1px solid",
+                borderImageSource: "linear-gradient(180deg, rgba(102, 102, 102, 0.12) 0%, rgba(0, 0, 0, 0.12) 100%)",
+                borderImageSlice: 1,
+              }}
             >
-              {/* Image */}
-              <div className='relative w-full aspect-4/3 bg-gray-50'>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className='absolute object-cover p-6'
-                  sizes='(max-width: 640px) 100vw,
-                         (max-width: 1024px) 50vw,
-                         33vw'
-                />
-                <div
-                  className='absolute inset-0 
-  bg-linear-to-br from-white/70 via-white/20 to-transparent
-'
-                />
 
-                <div
-                  className='absolute inset-0 
-  bg-linear-to-t from-gray-500/40 via-gray-500/10 to-transparent
-'
+              <div className='product-card w-full aspect-4/3 bg-gray-50 h-[280px] ld:h-[360px]'
+                style={{
+                  background: "linear-gradient(180deg, #FCFCFC 0%, #F5F5F5 100%)"
+                }}
+              >
+                <img
+                  src={getImageUrl(item?.gallery?.[0]?.url || "/uploads/placeholder.png")}
+                  alt={item.title}
+                  className='object-cover w-full h-full'
+                  style={{
+                    background: "linear-gradient(180deg, #FCFCFC 0%, #F5F5F5 100%)"
+                  }}
                 />
               </div>
 
-              {/* Content */}
-              <div className='px-5 py-4 '>
-                <h3 className='text-sm font-medium text-red-600 uppercase'>
+              <div className='flex px-5 py-4 flex-col gap-2'>
+                <h3 className='text-lg font-medium text-brand-primary uppercase line-clamp-2 overflow-hidden text-ellipsis'>
                   {item.title}
                 </h3>
+                <div className='flex-1 text-sm flex flex-wrap items-center gap-2'>
+                  <div className='flex items-center gap-2'>
+                    <div className='flex items-center'>
+                      {[...Array(5)].map((_, i) => (
+                        <LuStar
+                          key={i}
+                          className={`w-4 h-4 ${i < Math.floor(item.rating)
+                            ? "text-yellow-400 fill-current"
+                            : "text-gray-300"
+                            }`}
+                        />
+                      ))}
+                    </div>
 
-                <div className='mt-2 flex items-center justify-between text-red-600'>
-                  <span className='text-xs sm:text-sm '>{item.watt}</span>
-
-                  <button className='text-xs sm:text-sm font-medium  hover:underline'>
-                    View
-                  </button>
+                    <span className='font-medium'>{item.rating}</span>
+                  </div>
+                  <span className='text-gray-500'>
+                    ({item.totalRatings} Ratings)
+                  </span>
                 </div>
               </div>
             </div>
