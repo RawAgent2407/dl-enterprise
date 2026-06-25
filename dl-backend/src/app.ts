@@ -18,8 +18,6 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 
-// Static file serving
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/panel', express.static(path.join(__dirname, '../public/panel')));
 
 // API routes

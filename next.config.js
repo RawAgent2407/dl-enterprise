@@ -23,6 +23,10 @@ const nextConfig = {
         port: "1337",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "dl-enterprise-media.s3.ap-south-1.amazonaws.com",
+      },
     ],
   },
 };
