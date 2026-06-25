@@ -50,39 +50,50 @@
 
 @layer base {
   body {
-    @apply bg-white text-foreground font-dm overflow-x-hidden;
+    background-color: white;
+    color: #171724;
+    font-family: var(--font-dm), sans-serif;
+    overflow-x: hidden;
   }
 
   p {
-    @apply font-body text-base font-medium leading-4 text-[#242424];
+    font-family: var(--font-body), sans-serif;
+    @apply text-base font-medium leading-4 text-[#242424];
   }
 
   h1 {
-    @apply font-heading font-normal text-[56px] leading-[56px] tracking-[-0.04em] text-[#171724];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-normal text-[56px] leading-[56px] tracking-[-0.04em] text-[#171724];
   }
 
   h2 {
-    @apply font-heading font-medium text-[28px] leading-[36px] md:text-[48px] md:leading-[56px] text-[#050B16];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-medium text-[28px] leading-[36px] md:text-[48px] md:leading-[56px] text-[#050B16];
   }
 
   h3 {
-    @apply font-heading font-normal text-[32px] leading-[32px] tracking-[-0.04em] text-[#171724];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-normal text-[32px] leading-[32px] tracking-[-0.04em] text-[#171724];
   }
 
   h4 {
-    @apply font-heading font-semibold text-[20px] md:text-[24px] leading-[0px] tracking-[-0.04em] text-[#A60006];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-semibold text-[20px] md:text-[24px] leading-[0px] tracking-[-0.04em] text-[#A60006];
   }
 
   h5 {
-    @apply font-heading font-bold text-[14px] leading-[150%] tracking-[10%] text-[#000];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-bold text-[14px] leading-[150%] text-[#000];
   }
 
   .headline {
-    @apply font-body font-medium text-[18px] leading-[26px] text-[#4B4B63];
+    font-family: var(--font-body), sans-serif;
+    @apply font-medium text-[18px] leading-[26px] text-[#4B4B63];
   }
 
   .subheadline {
-    @apply font-dm font-medium leading-[24px] text-[--subtext] text-[14px] sm:text-[15px] md:text-[16px] lg:text-[16px];
+    font-family: var(--font-dm), sans-serif;
+    @apply font-medium leading-[24px] text-[#7E7E7E] text-[14px] sm:text-[15px] md:text-[16px];
   }
 }
 
@@ -91,19 +102,23 @@
 ================================ */
 @layer components {
   .btn-primary {
-    @apply bg-[#121212] text-white font-heading font-medium px-[40px] py-[14px] rounded-xs transition hover:opacity-90;
+    font-family: var(--font-heading), sans-serif;
+    @apply bg-[#121212] text-white font-medium px-[40px] py-[14px] rounded-[4px] transition hover:opacity-90;
   }
 
   .btn-secondary {
-    @apply bg-[#A60006] text-white font-heading font-medium px-[32px] py-[10px] rounded-xs border border-[#A60006] transition hover:bg-[#E01D25];
+    font-family: var(--font-heading), sans-serif;
+    @apply bg-[#A60006] text-white font-medium px-[32px] py-[10px] rounded-[4px] border border-[#A60006] transition hover:bg-[#E01D25];
   }
 
   .btn-tertiary {
-    @apply font-heading font-medium text-[16px] leading-[16px] tracking-[0.02em] capitalize text-[#4B4B63] px-[20px] py-[4px] border-b border-[#A60006] transition hover:text-[#A60006] h-[56px];
+    font-family: var(--font-heading), sans-serif;
+    @apply font-medium text-[16px] leading-[16px] tracking-[0.02em] capitalize text-[#4B4B63] px-[20px] py-[4px] border-b border-[#A60006] transition hover:text-[#A60006] h-[56px];
   }
 
   .btn-view-all {
-    @apply font-dm font-medium text-[14px] leading-[24px] uppercase underline underline-offset-[25%] text-center;
+    font-family: var(--font-dm), sans-serif;
+    @apply font-medium text-[14px] leading-[24px] uppercase underline underline-offset-[25%] text-center;
   }
 
   .container-xl {
@@ -133,7 +148,8 @@
   .footer-padding-y { @apply py-[56px] lg:py-[120px]; }
 
   .nav-link {
-    @apply font-nav font-medium text-[14px] text-[#111] transition hover:text-[#A60006];
+    font-family: "Plus Jakarta Sans", sans-serif;
+    @apply font-medium text-[14px] text-[#111] transition hover:text-[#A60006];
   }
 
   .mobile-link {
@@ -141,7 +157,8 @@
   }
 
   .card {
-    @apply bg-white rounded-lg border border-neutral-100 p-6 shadow-card;
+    @apply bg-white rounded-lg border border-neutral-100 p-6;
+    box-shadow: var(--shadow-card);
   }
 
   .product-card-box:hover {
