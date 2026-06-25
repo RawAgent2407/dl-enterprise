@@ -36,13 +36,15 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   const uiProduct = {
     id: product.documentId,
     title: product.title,
+    description: product.description ?? '',
     rating: product.rating,
     totalRatings: product.totalRatings,
     images,
-    variants: product.variants,
-    coreSpecifications: product.coreSpecifications,
-    electricalSpecifications: product.electricalSpecifications,
-    keyFeatures: product.keyFeatures,
+    dimension: product.dimension ?? null,
+    installationSteps: product.installationSteps ?? null,
+    accessories: product.accessories ?? null,
+    sketch: product.sketch ?? null,
+    descriptions: product.descriptions ?? [],
     breadcrumb,
   };
 
