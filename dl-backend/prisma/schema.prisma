@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_DIRECT")
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
+
+model Upload {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String
+  mime      String
+  size      Float
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now())
+
+  categoryImage         Category[]       @relation("CategoryImage")
+  categoryBanner        Category[]       @relation("CategoryBanner")
+  productGallery        ProductGallery[]
+}
+
+model Category {
+  id             Int       @id @default(autoincrement())
+  documentId     String    @unique @default(cuid())
+  title          String
+  slug           String    @unique
+  description    String?
+  imageId        Int?
+  bannerImageId  Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  image          Upload?   @relation("CategoryImage", fields: [imageId], references: [id])
+  bannerImage    Upload?   @relation("CategoryBanner", fields: [bannerImageId], references: [id])
+  products       Product[]
+}
+
+model Product {
+  id                       Int              @id @default(autoincrement())
+  documentId               String           @unique @default(cuid())
+  title                    String
+  slug                     String           @unique
+  description              String?
+  rating                   Float            @default(0)
+  totalRatings             Int?
+  categoryId               Int?
+  variants                 Json             @default("[]")
+  coreSpecifications       Json             @default("[]")
+  electricalSpecifications Json             @default("[]")
+  keyFeatures              Json             @default("[]")
+  daigram                  Json?
+  createdAt                DateTime         @default(now())
+  updatedAt                DateTime         @updatedAt
+
+  category                 Category?        @relation(fields: [categoryId], references: [id])
+  gallery                  ProductGallery[]
+}
+
+model ProductGallery {
+  id       Int    @id @default(autoincrement())
+  productId Int
+  uploadId  Int
+  order     Int   @default(0)
+
+  product  Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  upload   Upload  @relation(fields: [uploadId], references: [id])
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  documentId  String   @unique @default(cuid())
+  name        String
+  email       String?
+  phone       String
+  message     String?
+  productName String?
+  createdAt   DateTime @default(now())
+}

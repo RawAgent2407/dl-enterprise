@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   BASE TOKENS
+================================ */
+:root {
+  --background: #ffffff;
+  --foreground: #171724;
+  --subtext: #7E7E7E;
+}
+
+/* ===============================
+   BASE LAYER
+================================ */
+@layer base {
+  body {
+    @apply bg-white text-foreground font-dm;
+  }
+
+  /* ---------- TYPOGRAPHY ---------- */
+
+  /* Body text / paragraph */
+  p {
+    @apply font-body text-base font-medium leading-4 text-[#242424];
+  }
+
+  /* H1 */
+  h1 {
+    @apply font-heading font-normal text-[56px] leading-[56px] tracking-[-0.04em] text-[#171724];
+  }
+
+  /* H2 */
+  h2 {
+    @apply font-heading font-medium text-[28px] leading-[36px] md:text-[48px] md:leading-[56px] text-[#050B16];
+  }
+
+  /* H3 */
+  h3 {
+    @apply font-heading font-normal text-[32px] leading-[32px] tracking-[-0.04em] text-[#171724];
+  }
+
+  /* H4 */
+  h4 {
+    @apply font-heading font-semibold text-[20px] md:text-[24px] leading-[0px] tracking-[-0.04em] text-[#A60006];
+  }
+
+  /* H5 */
+  h5 {
+    @apply font-heading font-bold text-[14px] leading-[150%] tracking-[10%] text-[#000];
+  }
+
+  /* Headline / subtitle text */
+  .headline {
+    @apply font-body font-medium text-[18px] leading-[26px] text-[#4B4B63];
+  }
+
+  .subheadline {
+    @apply font-dm font-medium leading-[24px] text-[--subtext] text-[14px] sm:text-[15px] md:text-[16px] lg:text-[16px];
+  }
+}
+
+
+@layer utilities {
+  .shadow-product-hover {
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-product {
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ===============================
+   COMPONENT LAYER
+================================ */
+@layer components {
+  /* ---------- BUTTONS ---------- */
+
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-[#121212] text-white font-heading font-medium px-[40px] py-[14px] rounded-sm transition hover:opacity-90;
+  }
+
+  /* Secondary (Ghost) Button */
+  .btn-secondary {
+    @apply bg-[#A60006] text-white font-heading font-medium px-[32px] py-[10px] rounded-sm border border-[#A60006] transition hover:bg-[#E01D25];
+  }
+
+  /* Tertiary Button / Link */
+  .btn-tertiary {
+    @apply font-heading font-medium text-[16px] leading-[16px] tracking-[0.02em] capitalize text-[#4B4B63] px-[20px] py-[4px] border-b border-[#A60006] transition hover:text-[#A60006] h-[56px];
+  }
+
+  /* View All Button */
+  .btn-view-all {
+    @apply font-['DM_Sans'] font-medium text-[14px] leading-[24px] uppercase underline underline-offset-[25%] decoration-[5%] text-center;
+  }
+
+  /* ---------- LAYOUT ---------- */
+
+  .container-xl {
+    @apply max-w-[1440px] mx-auto px-6;
+  }
+
+  section {
+    @apply py-[64px] px-[24px] lg:py-[80px] lg:px-[80px] xl:px-[160px];
+  }
+
+  .section-gap {
+    @apply gap-6 sm:gap-10 xl:gap-10;
+  }
+
+  .section-padding {
+    @apply py-[64px] px-[24px] lg:py-[80px] lg:px-[80px] xl:px-[160px];
+  }
+
+  .section-padding-x {
+    @apply px-[24px] lg:px-[80px] xl:px-[160px];
+  }
+
+  .section-padding-y {
+    @apply py-[64px] lg:py-[80px];
+  }
+
+  .section-mr {
+    @apply mr-[24px] lg:mr-[80px] xl:mr-[160px];
+  }
+
+  .section-ml {
+    @apply ml-[24px] lg:ml-[80px] xl:ml-[160px];
+  }
+
+  section.semi-width {
+    @apply pb-20 pt-6 px-6 md:p-20;
+  }
+
+  .section-gap-removeal:has(+ .section-gap-removeal) {
+    @apply max-lg:pb-0;
+  }
+
+  /* ---------- FORMS ---------- */
+  .footer-padding-x {
+    @apply px-[32px] md:px-[80px] xl:px-[120px];
+  }
+
+  .footer-padding-y {
+    @apply py-[56px] lg:py-[120px];
+  }
+
+  /* ---------- NAV ---------- */
+
+  .nav-link {
+    @apply font-nav font-medium text-[14px] text-[#111] transition hover:text-[#A60006];
+  }
+
+  .mobile-link {
+    @apply block w-full py-2 text-base font-medium text-gray-800;
+  }
+
+  /* ---------- CARDS ---------- */
+  .card {
+    @apply bg-white rounded-lg border border-neutral-100 p-6 shadow-product;
+  }
+
+  .product-card-box:hover {
+    @apply shadow-product-hover;
+  }
+
+  .product-card {
+    background: linear-gradient(180deg, #FCFCFC 0%, #EEEEEE 100%);
+    @apply bg-white;
+  }
+
+  .contact-card {
+    box-shadow: -13px 73px 30px rgba(0, 0, 0, 0.01), -8px 41px 25px rgba(0, 0, 0, 0.02), -3px 18px 19px rgba(0, 0, 0, 0.03), -1px 5px 10px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ===============================
+   UTILITIES
+================================ */
+.category-card-bg {
+  background: linear-gradient(rgb(252 252 252 / 20%) 0%, rgb(238 238 238 / 80%) 125%);
+}
+
+
+/* Pause animation on hover for better user experience */
+.scroller:hover .scroller__inner {
+  animation-play-state: paused;
+}
+
+.selcted-variant {
+  padding: 12px 16px;
+  background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
+  background-blend-mode: soft-light, normal;
+  border: 0.2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset -0.924092px -0.924092px 2px #FAFBFF, inset 2px 2px 4px #A6ABBD;
+  border-radius: 4px;
+}
+
+.variant {
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 1px solid #E9EAEB;
+  border-radius: 4px;
+}
+
+.button-sidearrow {
+  /* inner_10 */
+  background: linear-gradient(317.7deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0.4) 105.18%), #EBECF0;
+  background-blend-mode: soft-light, normal;
+  /* border: 0.2px solid rgba(255, 255, 255, 0.4); */
+  box-shadow: inset -0.924092px -0.924092px 2px #FAFBFF, inset 2px 2px 4px #A6ABBD;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar,
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Animations */
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.35s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.25s ease-out;
+}
+
+.animation-scroll {
+  animation: scroll var(--_animation-duration, 20s) forwards infinite linear;
+}
+
+.animation-scroll:hover {
+  animation-play-state: paused;
+}
+
+.animation-widthExpand {
+  animation: widthExpand 20s ease-out forwards infinite;
+}
+
+.animation-widthExpand:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  /* Moves the content half of its width (or more depending on setup) */
+  to {
+    transform: translateX(calc(-50% - 1rem)); 
+  }
+}
+
+
+@keyframes widthExpand {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
