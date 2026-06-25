@@ -43,7 +43,8 @@ async function main() {
   // 2. Categories
   console.log('Migrating categories...');
   const strapiCats = rows<{ id: number; document_id: string; title: string; slug: string; description: string | null; created_at: string; updated_at: string }>(
-    `SELECT id, document_id, title, slug, description, created_at, updated_at FROM categories`
+    `SELECT id, document_id, title, slug, description, created_at, updated_at FROM categories
+     WHERE id IN (SELECT MAX(id) FROM categories GROUP BY document_id)`
   );
 
   // Category images via files_related_mph (uses related_id, not entity_id)
@@ -91,7 +92,8 @@ async function main() {
   const strapiProducts = rows<{
     id: number; document_id: string; title: string; slug: string; description: string | null;
     rating: number | null; total_ratings: number | null; created_at: string; updated_at: string;
-  }>(`SELECT id, document_id, title, slug, description, rating, total_ratings, created_at, updated_at FROM products`);
+  }>(`SELECT id, document_id, title, slug, description, rating, total_ratings, created_at, updated_at FROM products
+      WHERE id IN (SELECT MAX(id) FROM products GROUP BY document_id)`);
 
   const prodSubcat = rows<{ product_id: number; subcategory_id: number }>(
     `SELECT product_id, subcategory_id FROM products_subcategory_lnk`
